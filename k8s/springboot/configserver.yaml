@@ -1,0 +1,51 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configservice
+  namespace: default
+  labels:
+    app: configservice
+spec:
+  selector:
+    matchLabels:
+      app: configservice
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: configservice
+    spec:
+      containers:
+      - name: configservice
+        image: parkmyounghoi/configserver
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 100m
+            memory: 2000Mi
+        ports:
+        - containerPort: 8888
+          name: configservice
+      # restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: configservice
+spec:
+  ports:
+  - nodePort: 30088
+    port: 8888
+    targetPort: 8888
+    
+  selector:
+    app: configservice
+  # clusterIP: None
+  type: LoadBalancer

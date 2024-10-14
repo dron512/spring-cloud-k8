@@ -1,0 +1,59 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eurekaservice
+  namespace: default
+  labels:
+    app: eurekaservice
+spec:
+  selector:
+    matchLabels:
+      app: eurekaservice
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: eurekaservice
+    spec:
+      containers:
+      - name: eurekaservice
+        image: parkmyounghoi/eurekaserver
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 100m
+            memory: 2000Mi
+        # livenessProbe:
+        #   tcpSocket:
+        #     port: 8761
+        #   initialDelaySeconds: 5
+        #   timeoutSeconds: 5
+        #   successThreshold: 1
+        #   failureThreshold: 3
+        #   periodSeconds: 10
+        ports:
+        - containerPort: 8761
+          name: eurekaservice
+      # restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eurekaservice
+spec:
+  ports:
+  - nodePort: 30061
+    port: 8761
+    targetPort: 8761
+    
+  selector:
+    app: eurekaservice
+  # clusterIP: None
+  type: LoadBalancer

@@ -1,0 +1,8 @@
+docker rmi secondservice
+docker rmi parkmyounghoi/secondservice
+docker build -t secondservice .
+docker tag secondservice parkmyounghoi/secondservice
+docker push parkmyounghoi/secondservice
+
+
+docker run -p 8082:8082 -d --network javamysql --name secondservice parkmyounghoi/secondservice
