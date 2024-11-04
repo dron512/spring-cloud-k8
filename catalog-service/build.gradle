@@ -36,11 +36,18 @@ dependencies {
     implementation 'org.modelmapper:modelmapper:3.2.0'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-
+    
+// kafka 사용
+    implementation 'org.springframework.kafka:spring-kafka'
+// matric 저장 하기
+    implementation 'io.micrometer:micrometer-observation'
+// zipkin 라이브러리 사용
+    implementation 'io.zipkin.brave:brave-instrumentation-spring-web'
+    implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
+    
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

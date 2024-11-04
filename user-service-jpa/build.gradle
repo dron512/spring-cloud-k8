@@ -22,7 +22,7 @@ repositories {
 }
 
 ext {
-    set('springCloudVersion', "2023.0.1")
+    set('springCloudVersion', "2023.0.3")
 }
 
 dependencies {
@@ -37,11 +37,34 @@ dependencies {
 
     implementation 'org.modelmapper:modelmapper:3.2.0'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+    implementation 'org.springframework.cloud:spring-cloud-netflix-eureka-client'
+
+    // kafka 사용
+    implementation 'org.springframework.kafka:spring-kafka'
+// matric 저장 하기
+    implementation 'io.micrometer:micrometer-observation'
+    implementation 'io.micrometer:micrometer-tracing-bridge-brave'
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+// zipkin 라이브러리 사용
+    implementation 'io.zipkin.brave:brave-instrumentation-spring-web'
+    implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
+
+    implementation 'io.github.openfeign:feign-micrometer'
+    
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+// https://mvnrepository.com/artifact/kr.dogfoot/hwplib
+    implementation 'kr.dogfoot:hwplib:1.0.1'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
     runtimeOnly 'com.mysql:mysql-connector-j'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
@@ -55,7 +78,6 @@ dependencies {
     //querydsl end
 
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
-
 
 }
 

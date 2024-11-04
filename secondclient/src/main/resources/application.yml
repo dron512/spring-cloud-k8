@@ -1,9 +1,12 @@
 server:
-  port: 8082
+  port: 20020
 
 spring:
   application:
     name: second-service
+mh:
+  value: the second value
+
 #eureka:
 #  instance:
 #    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}

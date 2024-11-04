@@ -1,0 +1,22 @@
+docker build -t kafkaproducer .
+docker tag kafkaproducer parkmyounghoi/kafkaproducer
+docker push parkmyounghoi/kafkaproducer
+docker run -p 8080:8080 -e SPRING_DATASOURCE_URL=jdbc:mysql://mysql-container:3306/pmh -e SPRING_DATASOURCE_PASSWORD=1234 -d --network javamysql --name kafkaproducer parkmyounghoi/kafkaproducer
+
+
+# 토픽 생성하기
+kafka-topics --create --topic topic1 --bootstrap-server localhost:9092
+kafka-topics --create --topic topic1 --bootstrap-server 192.168.0.29:9092
+
+# 토픽 삭제하기
+kafka-topics --delete --topic topic1 --bootstrap-server 192.168.0.29:9092
+
+
+# 컨슈머 실행하기
+kafka-console-consumer --topic topic1 --bootstrap-server localhost:9092
+kafka-console-consumer --topic topic1 --bootstrap-server 192.168.0.29:9092
+
+kafka-console-consumer --topic topic1 --bootstrap-server 192.168.0.29:9092 --from-beginning
+
+# 프로듀서 실행하기
+kafka-console-producer --topic topic1 --bootstrap-server 192.168.0.29:9092

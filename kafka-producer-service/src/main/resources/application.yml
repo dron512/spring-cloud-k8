@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: kafka-producer-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/pmh?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&requireSSL=false&serverTimezone=Asia/Seoul&allowMultiQueries=true
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate.format_sql: true
+    show-sql: true
+    open-in-view: false
+
+  sql:
+    init:
+      platform: mysql
+
+server:
+  port: 8090
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  #    prefer-ip-address: true
+  #    ip-address: ${server.address}
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+
+
+token:
+  expiration_time: 86400000
+  secret: mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004mh1004
+
+gateway:
+  ip: 127.0.0.1
+
+

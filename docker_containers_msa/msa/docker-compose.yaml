@@ -1,0 +1,103 @@
+services:
+  configserver:
+    image: parkmyounghoi/configserver
+    container_name: configserver
+    ports:
+      - "8888:8888"
+    networks:
+      - msa
+  eurekaserver:
+    image: parkmyounghoi/eurekaserver
+    container_name: eurekaserver
+    ports:
+      - "8761:8761"
+    networks:
+      - msa
+  firstservice:
+    image: parkmyounghoi/firstservice
+    container_name: firstservice
+    environment:
+      - spring.profiles.active=docker
+      - server.port=20010
+    ports:
+      - "8081:8081"
+    networks:
+      - msa
+    depends_on:
+      - eurekaserver
+  secondservice:
+    image: parkmyounghoi/secondservice
+    container_name: secondservice
+    environment:
+      - spring.profiles.active=docker
+      - server.port=20020
+    ports:
+      - "8082:8082"
+    networks:
+      - msa
+    depends_on:
+      - eurekaserver
+  apigatewayserver:
+    image: parkmyounghoi/apigatewayserver
+    container_name: apigatewayserver
+    environment:
+      - spring.cloud.config.uri=http://configserver:8888
+      - spring.cloud.config.name=apigateway-server
+      - spring.profiles.active=docker
+    ports:
+      - "8080:8080"
+    networks:
+      - msa
+#  catalogservice:
+#    image: parkmyounghoi/catalogservice
+#    container_name: catalogservice
+#    environment:
+#      - spring.cloud.config.uri=http://configserver:8888
+#      - spring.cloud.config.name=catalog-service
+#      - spring.profiles.active=docker
+#    ports:
+#      - "10002:10002"
+#    networks:
+#      - javamysql
+    # depends_on:
+    # - mysql-container
+    #   condition: service_healthy
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234 # MySQL 루트 사용자 비밀번호
+      MYSQL_DATABASE: msa # 초기 생성할 데이터베이스 이름
+      MYSQL_USER: msa # MySQL 사용자의 이름
+      MYSQL_PASSWORD: 1234 # 해당 사용자의 비밀번호
+    ports:
+      - "3306:3306"
+    networks:
+      - msa
+#    volumes:
+#      - ./initdb.d:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+  #   environment:
+  #     - STORAGE_TYPE=mysql
+  #     - MYSQL_DB=msa
+  #     - MYSQL_USER=root
+  #     - MYSQL_PASS=1234
+  #     - MYSQL_HOST=mysql
+  #   networks:
+  #     - javamysql
+    # depends_on:
+    #   mysql:
+    #     condition: service_healthy
+networks:
+  msa:
+    driver: bridge

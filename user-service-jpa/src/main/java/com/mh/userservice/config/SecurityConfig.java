@@ -9,10 +9,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @RequiredArgsConstructor
@@ -35,20 +33,26 @@ public class SecurityConfig {
         http.csrf((csrf) -> csrf.disable());
 //        http.csrf(AbstractHttpConfigurer::disable);
 
-        http.authorizeHttpRequests((authz) -> authz
-                                .requestMatchers(new AntPathRequestMatcher("/actuator/**")).permitAll()
+        http.authorizeHttpRequests((authz) -> authz.requestMatchers("/**").permitAll()
+//                                .requestMatchers(new AntPathRequestMatcher("/actuator/**")).permitAll()
 //                                .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/add-user", "POST")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/login", "GET")).permitAll()
-
-//                                .requestMatchers(new AntPathRequestMatcher("/users", "*")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("*")).permitAll()
+//                                .requestMatchers(new AntPathRequestMatcher("/users", "POST")).permitAll()
+//                                .requestMatchers(new AntPathRequestMatcher("/welcome")).permitAll()
+//                                .requestMatchers(new AntPathRequestMatcher("/health-check")).permitAll()
+//                                .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
+//                                .requestMatchers(new AntPathRequestMatcher("/swagger-resources/**")).permitAll()
+//                                .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
+////                        .requestMatchers("/**").access(this::hasIpAddress)
+//                                .requestMatchers("/**").access(
+//                                        new WebExpressionAuthorizationManager("hasIpAddress('localhost') " +
+//                                                "or hasIpAddress('127.0.0.1')")) // host pc ip address
+//                                .anyRequest().authenticated()
 
 //                        .requestMatchers("/**").access(this::hasIpAddress)
 //                                .requestMatchers("/**").access(
 //                                        new WebExpressionAuthorizationManager("hasIpAddress('127.0.0.1') or hasIpAddress('172.30.1.48')"))
 //                                .anyRequest().authenticated()
-                                .anyRequest().permitAll()
+//                                .anyRequest().permitAll()
 
                 )
                 .authenticationManager(authenticationManager)

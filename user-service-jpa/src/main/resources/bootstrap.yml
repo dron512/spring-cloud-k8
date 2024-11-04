@@ -1,0 +1,20 @@
+spring:
+  profiles:
+#    active: jpa
+    active: test
+  cloud:
+    config:
+      uri: http://localhost:8888
+      name: user-service
+
+#encrypt:
+#  keyStore:
+    # 리눅스 맥 비밀번호 파일 경로 설정
+#    location: file://${user.home}/work/spring-cloud/user-service-jpa/server.jks
+    # 윈도우 비밀파일 경로 설정
+#    location: file:///D:/spring-cloud/user-service-jpa/server.jks
+#    password: 123456
+#    alias: mytestkey
+#    secret: 123456
+
+

@@ -5,9 +5,9 @@
 <!-- 위 코드가 mapper 설정을 하는 코드 -->
 
 <!-- Mapper를 사용하는 Repository의 전체 경로를 적어줘야함. -->
-<mapper namespace="com.mh.userservice.repository.UserRepository">
+<mapper namespace="com.mh.orderservice.repository.CatalogRepository">
     <insert id="save"
-            parameterType="com.mh.userservice.dto.UserMapperDto">
+            parameterType="com.mh.orderservice.dto.UserMapperDto">
         insert into users
             (user_id,user_email, user_password, user_name)
         values

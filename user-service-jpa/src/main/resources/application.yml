@@ -1,35 +1,8 @@
-spring:
-  application:
-    name: user-service
-  datasource:
-    username: root
-    password: 1234
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/pmh?characterEncoding=UTF-8&serverTimezone=UTC
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: refresh, health, beans, busrefresh, info, metrics, prometheus
 
-  jpa:
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate.format_sql: true
-    show-sql: true
-    open-in-view: false
-
-sql:
-  init:
-    platform: mysql
-
-mh:
-  value: "mh user service value"
-
-server:
-  port: 8089
-
-token:
-  expiration_time: 86400000
-  secret: abcdefghijklmonpqrstupwxyz01234567890
-
-gateway:
-  ip: 127.0.0.1
 
 

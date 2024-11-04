@@ -26,6 +26,11 @@ public class CatalogController {
     private final ModelMapper modelMapper;
     private final DiscoveryClient discoveryClient;
 
+    @GetMapping("/")
+    public ResponseEntity<String> getCatalog() {
+        return ResponseEntity.ok("루트페이지");
+    }
+
     @GetMapping("/health-check")
     public String status() {
         List<ServiceInstance> serviceList = getApplications();

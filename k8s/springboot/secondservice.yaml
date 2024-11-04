@@ -1,0 +1,53 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secondservice
+  namespace: default
+  labels:
+    app: secondservice
+spec:
+  selector:
+    matchLabels:
+      app: secondservice
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: secondservice
+    spec:
+      containers:
+      - name: secondservice
+        image: parkmyounghoi/secondservice:k8.0.1
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 1000Mi
+        ports:
+        - containerPort: 8082
+          name: secondservice
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: secondservice
+spec:
+  ports:
+  - nodePort: 30082
+    port: 8082
+    targetPort: 8082
+
+  selector:
+    app: secondservice
+  # clusterIP: None
+  type: LoadBalancer

@@ -65,13 +65,14 @@ public class AuthenticationFilter  extends UsernamePasswordAuthenticationFilter 
         Instant now = Instant.now();
 
         String token = Jwts.builder()
-                .setSubject(userDetails.getId())
+                .setSubject(userDetails.getUserId())
                 .setExpiration(Date.from(now.plusMillis(Long.parseLong(environment.getProperty("token.expiration_time")))))
                 .setIssuedAt(Date.from(now))
                 .signWith(secretKey)
                 .compact();
 
+        res.getWriter().println(token);
         res.addHeader("token", token);
-        res.addHeader("userId", userDetails.getId());
+        res.addHeader("userId", userDetails.getUserId());
     }
 }
