@@ -1,9 +1,4 @@
-docker rm firstservice:k8.0.1
 docker rmi parkmyounghoi/firstservice:k8.0.1
-docker rmi firstservice:k8.0.1
-docker build -t firstservice:k8.0.1 .
-docker tag firstservice parkmyounghoi/firstservice:k8.0.1
-docker push parkmyounghoi/firstservice:k8.0.1
 
-docker run -p 8081:8081 -d --network javamysql --name firstservice \
- -e EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eurekaserver:8761/eureka parkmyounghoi/firstservice
+docker build -t parkmyounghoi/firstservice:k8.0.2 .
+docker push parkmyounghoi/firstservice:k8.0.2

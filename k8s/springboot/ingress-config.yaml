@@ -13,7 +13,7 @@ spec:
           service:
             name: firstservice
             port:
-              number: 8081
+              number: 20010
   - host: second.hellomh.site
     http:
       paths:
@@ -23,5 +23,5 @@ spec:
           service:
             name: secondservice
             port:
-              number: 8082
+              number: 20020
   ingressClassName: nginx

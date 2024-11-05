@@ -38,7 +38,7 @@ dependencies {
     implementation 'org.modelmapper:modelmapper:3.2.0'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
-    implementation 'org.springframework.cloud:spring-cloud-netflix-eureka-client'
+//    implementation 'org.springframework.cloud:spring-cloud-netflix-eureka-client'
 
     // kafka 사용
     implementation 'org.springframework.kafka:spring-kafka'
@@ -52,10 +52,10 @@ dependencies {
 
     implementation 'io.github.openfeign:feign-micrometer'
     
-    implementation 'org.springframework.cloud:spring-cloud-starter-config'
-    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+//    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+//    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
     implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+//    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
 // https://mvnrepository.com/artifact/kr.dogfoot/hwplib
     implementation 'kr.dogfoot:hwplib:1.0.1'
