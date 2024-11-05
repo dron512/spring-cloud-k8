@@ -14,14 +14,15 @@ import java.util.Map;
 
 @EnableKafka
 @Configuration
-public class KafkaProdcerConfig {
+public class KafkaConsumerConfig {
 
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
 
         Map<String, Object> properties = new HashMap<>();
 
-        properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.0.29:9092");
+//        properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka.hellomh.site:9092");
+        properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "112.222.157.156:9092");
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, "consumerGroupId");
         properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);

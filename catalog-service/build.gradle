@@ -53,6 +53,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     runtimeOnly 'com.mysql:mysql-connector-j'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
     //querydsl start
 //    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'

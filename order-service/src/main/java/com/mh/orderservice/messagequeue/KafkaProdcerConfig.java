@@ -26,7 +26,8 @@ public class KafkaProdcerConfig {
     @Bean
     public ProducerFactory producerFactory() {
         Map<String, Object> properties = new HashMap<>();
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.0.29:9092");
+//        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka.hellomh.site:9092");
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "112.222.157.156:9092");
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 
