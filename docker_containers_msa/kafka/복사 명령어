@@ -1,0 +1,14 @@
+# jdbc 커넥터 설치
+# confluent-hub install confluentinc/kafka-connect-jdbc:latest
+
+docker cp mariadb-java-client-3.3.3.jar connect:/usr/share/java/kafka/
+docker cp mysql-connector-j-8.3.0.jar connect:/usr/share/java/kafka/
+docker cp kafka-connect-jdbc-10.8.0.jar connect:/usr/share/java/kafka/
+
+# ADD mariadb-java-client-<version>.jar /usr/share/java/kafka-connect-jdbc/
+
+# 컨슈머 실행
+# kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic jdbc-user_entity --from-beginning
+# kafka-console-consumer.sh --bootstrap-server localhost:9092
+
+# INSERT INTO `msa`.`user_entity` (`idx`, `email`, `name`, `password`, `user_id`) VALUES (4, 'qwer', 'qwer', 'qwer', 'qwer');

@@ -2,7 +2,12 @@
 kafka-topics --create --topic topic1 --bootstrap-server localhost:9092
 kafka-topics --create --topic topic1 --bootstrap-server 192.168.0.29:9092
 
+kafka-topics --list --bootstrap-server 192.168.0.29:9092
+
+
 kafka-topics --create --topic order-topic --bootstrap-server 192.168.0.29:9092
+kafka-topics --create --topic topic --bootstrap-server kafka.hellomh.site:9092
+
 
 
 # 토픽 삭제하기
