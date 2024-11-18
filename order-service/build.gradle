@@ -39,16 +39,17 @@ dependencies {
 
 //    implementation 'org.springframework.cloud:spring-cloud-starter-config'
 //    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
-//    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
 
 // kafka 사용
     implementation 'org.springframework.kafka:spring-kafka'
-// matric 저장 하기
+// zipkin 메트릭 저장 하기
     implementation 'io.micrometer:micrometer-observation'
     implementation 'io.micrometer:micrometer-tracing-bridge-brave'
+// prometheus 메트릭 저장하기
     implementation 'io.micrometer:micrometer-registry-prometheus'
-// zipkin 라이브러리 사용
+// zipkin tranID spanID 생성 라이브러리 사용
     implementation 'io.zipkin.brave:brave-instrumentation-spring-web'
     implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
 

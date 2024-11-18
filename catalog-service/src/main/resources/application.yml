@@ -23,23 +23,29 @@ spring:
     init:
       mode: always
       platform: mysql
-
+  tracing:
+    sampling:
+      probability: 1.0
+    propagation:
+      consume: B3
+      produce: B3
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+    base-url: http://localhost:9411
+    enabled: true
 #mh:
 #  value: "{cipher}AQBVHrD0Sf21J5LYWyDRUKPll0WQN0+vrUz+O+wAoiFeoIFqD7uqdFf4nDlpm7cQaAikKMHrTh4Kfih63whp+iTKhgt7Mu6T7uUtIMs6HqbRaAP8N1voOZHeWZe+f8K9jgyY41iq50BRGwnI/SMRDpWM+MZQF589D9c1H8vc20D7qwsAjqWoixyGoZwdy1a1Sg9zXWrhmZ/fHGyNy4ne15Sgp1Whh5XlGTjd5Ccgs9KPW1chp5y+e61DHm+3Qqff6Koa2FgIzjLV7Qt8DRCA8BoDIw/QlD/QLUIX3KrkHVIvE7UneM3HYdYgRXIk4VilNBNbDQyuA7rK7Yi0Q1BlFRIbxLV7Wvoqzs+FwRzShPQAtpftZYlmVTqvgMZT96Y++AM="
 
 server:
   port: 10002
 
-#eureka:
-#  instance:
-#    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-  #    prefer-ip-address: true
-  #    ip-address: ${server.address}
-#  client:
-#    service-url:
-#      defaultZone: http://127.0.0.1:8761/eureka
-#    fetch-registry: true
-#    register-with-eureka: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, busrefresh, info, metrics, prometheus
+
 
 
 token:

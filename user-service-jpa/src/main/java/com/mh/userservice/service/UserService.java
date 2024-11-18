@@ -113,19 +113,18 @@ public class UserService implements UserDetailsService {
 //        catalogList = catalogListResponse.getBody();
 //        System.out.println(catalogList);
 
-//        try {
-//            ResponseEntity<List<ResponseOrder>> _ordersList = orderServiceClient.getOrders(userId);
-//            ordersList = _ordersList.getBody();
-//            ordersList = orderServiceClient.getOrders(userId);
-//        } catch (FeignException ex) {
-//            log.error(ex.getMessage());
-//        }
+        try {
+            List<ResponseOrder> _ordersList = orderServiceClient.getOrders(userId);
+            ordersList = orderServiceClient.getOrders(userId);
+        } catch (FeignException ex) {
+            log.error(ex.getMessage());
+        }
 
-        ordersList = circuitBreakerFactory.create("default")
-                .run(
-                     () -> orderServiceClient.getOrders(userId),
-                    throwable -> new ArrayList()
-                );
+//        ordersList = circuitBreakerFactory.create("default")
+//                .run(
+//                     () -> orderServiceClient.getOrders(userId),
+//                    throwable -> new ArrayList()
+//                );
 
         // catalog 서비스 테스트
 //        try {

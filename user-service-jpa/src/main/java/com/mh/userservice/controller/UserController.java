@@ -6,6 +6,7 @@ import com.mh.userservice.entity.UserEntity;
 import com.mh.userservice.feignclient.CatalogServiceClient;
 import com.mh.userservice.service.UserService;
 import com.mh.userservice.vo.ResponseUser;
+import io.micrometer.core.annotation.Timed;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,7 @@ public class UserController {
 
     private final CatalogServiceClient catalogServiceClient;
 
+    @Timed(value = "user.cata")
     @GetMapping("/cata")
     public String cata(){
         String test = catalogServiceClient.test();
@@ -41,6 +43,7 @@ public class UserController {
         return test;
     }
 
+    @Timed(value = "user.env", longTask = true)
     @GetMapping("/env")
     public String env(){
         log.info("mh.value = {}",environment.getProperty("mh.value"));
@@ -52,6 +55,7 @@ public class UserController {
                 ,environment.getProperty("mh.value"));
     }
 
+    @Timed(value = "user.adduser",longTask =false)
     @PostMapping("/add-user")
     public ResponseEntity<UserResDto> user(@Valid @RequestBody UserReqDto userReqDto){
         UserResDto userResDto = userService.createUser(userReqDto);
@@ -59,6 +63,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
+    @Timed(value = "user.login",longTask = true)
     public void login(String email, String password, HttpServletResponse res) throws IOException {
         res.sendRedirect("/users/login?email="+email+"&password="+password);
     }
@@ -70,6 +75,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}")
+    @Timed(value = "user.users",longTask = true)
     public ResponseEntity getUser(@PathVariable("userId") String userId) {
         UserResDto userResDto = userService.getUserByUserId(userId);
 

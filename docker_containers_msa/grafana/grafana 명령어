@@ -1,0 +1,3 @@
+https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/
+
+docker run -d -p 3000:3000 --name=grafana grafana/grafana-enterprise

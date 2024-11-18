@@ -3,7 +3,7 @@ kind: Deployment # what to create?
 metadata:
   name: mariadb-deployment
 spec: # specification for deployment resource
-  replicas: 2 # how many replicas of pods we want to create
+  replicas: 1 # how many replicas of pods we want to create
   selector:
     matchLabels:
       app: mariadb
@@ -42,3 +42,7 @@ spec:
       targetPort: 3306
   selector:
     app: mariadb
+    
+  
+# pod scale 바꾸기    
+# kubectl scale deployment mariadb-deployment --replicas=1

@@ -1,11 +1,16 @@
 # application.yml 10000
 # bootsrap.yml configserver 20000 -> 환경설정 우선순위
 server:
-  port: 20000
+  port: 10000
 
 spring:
   application:
     name: user-service
+  cloud:
+    openfeign:
+      loadbalancer:
+        ribbon:
+          enable: false
   datasource:
     username: root
     password: 1234
@@ -16,10 +21,6 @@ spring:
   output:
     ansi:
       enabled: always
-
-  # zipkin:
-  #   base-url: http://localhost:9411
-  #   enabled: true
 
   jpa:
     hibernate:
@@ -35,20 +36,42 @@ spring:
 
 logging:
   level:
-    com.green.userservice.feignclient: DEBUG
+    io.micrometer.core.instrument: DEBUG    # Micrometer 관련 로그
+    org.springframework.boot.actuate.metrics: TRACE    # Spring Boot Actuator 메트릭 관련 로그
+    org.springframework.web: TRACE    # HTTP 요청 관련 로그 (Actuator HTTP 엔드포인트)
+#  마이크로 서비스간 통신 로그 출력
+    com.green.userservice.feignclient: TRACE
+#  pattern:
+#    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
   pattern:
-    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+    file: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"  # 파일 로그 패턴
+    
+# 로그를 파일에 저장하는 방법
+#  file:
+#    name: logs/app.log  # 로그 파일 경로 설정
 
-# management:
-#   tracing:
-#     sampling:
-#       probability: 1.0
-#     propagation:
-#       consume: B3
-#       produce: B3
-#   zipkin:
-#     tracing:
-#       endpoint: http://localhost:9411/api/v2/spans
+management:
+  metrics:
+    enable:
+      user: true
+      timed: true
+    tags:
+      application: ${spring.application.name}
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, busrefresh, info, metrics, prometheus
+  tracing:
+    sampling:
+      probability: 1.0
+    propagation:
+      consume: B3
+      produce: B3
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+    base-url: http://localhost:9411
+    enabled: true
 
 # jwt 비밀번호
 
@@ -60,3 +83,5 @@ token:
 
 gateway:
   ip: 127.0.0.1
+
+order-service-url: ${ORDER-SERVICE-URL}

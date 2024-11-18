@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-@FeignClient(name="CATALOG-SERVICE",configuration = CatalogFeignErrorDecoder.class)
+@FeignClient(name="http://localhost:10002",configuration = CatalogFeignErrorDecoder.class)
 public interface CatalogServiceClient {
 
     @GetMapping("/catalogs")
