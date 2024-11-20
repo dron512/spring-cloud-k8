@@ -4,8 +4,14 @@ metadata:
   name: mariadb-initdb-config
 data:
   init.sql: |
-    CREATE DATABASE IF NOT EXISTS mydata;
-    CREATE DATABASE IF NOT EXISTS msa;
+    CREATE DATABASE IF NOT EXISTS mydata
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_general_ci;
+    
+    CREATE DATABASE IF NOT EXISTS msa
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_general_ci;
+    
     USE mydata;
     CREATE TABLE friends (id INT, name VARCHAR(256), age INT, gender VARCHAR(3));
     INSERT INTO friends VALUES (1, 'Abhijeet', 32, 'm');

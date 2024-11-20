@@ -4,20 +4,16 @@ metadata:
   name: pmh-ingress
 spec:
   rules:
-  - host: first.hellomh.site
-    http:
+  - http:
       paths:
-      - path: /
+      - path: /first
         pathType: Prefix
         backend:
           service:
             name: firstservice
             port:
               number: 20010
-  - host: second.hellomh.site
-    http:
-      paths:
-      - path: /
+      - path: /second
         pathType: Prefix
         backend:
           service:

@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: secondservice
-        image: parkmyounghoi/secondservice:k8.0.2
+        image: parkmyounghoi/secondservice:k8.0.6
         imagePullPolicy: Always
         resources:
           requests:

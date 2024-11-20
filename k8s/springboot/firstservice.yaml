@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: firstservice
-        image: parkmyounghoi/firstservice:k8.0.2
+        image: parkmyounghoi/firstservice:k8.0.6
         imagePullPolicy: Always
         resources:
           requests:

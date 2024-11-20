@@ -5,16 +5,16 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: user-app
+      app: user-deploy
   replicas: 1
   template:
     metadata:
       labels:
-        app: user-app
+        app: user-deploy
     spec:
       containers:
         - name: user-service
-          image: edowon0623/user-service:ssg_v1.1
+          image: parkmyounghoi/userservice:k8.0.2
           imagePullPolicy: Always
           ports:
             - containerPort: 60000
@@ -24,6 +24,15 @@ spec:
               cpu: 500m
               memory: 1000Mi
           env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mariadb://mariadb:3306/msa
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: password
             - name: GATEWAY_IP
               valueFrom:
                 configMapKeyRef:
@@ -52,7 +61,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: user-app
+    app: user-deploy
   ports:
     - protocol: TCP
       port: 60000

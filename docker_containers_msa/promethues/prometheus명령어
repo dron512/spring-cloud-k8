@@ -6,6 +6,8 @@ docker run \
     prom/prometheus
 
 # docker cp ./prometheus.yml prometheus:/etc/prometheus/prometheus.yml
+# docker cp ./promethuesk8s.yml prometheus:/etc/prometheus/prometheus.yml
+
 
 docker run \
     --name prometheus \

@@ -1,4 +1,2 @@
-docker rmi parkmyounghoi/firstservice:k8.0.1
-
-docker build -t parkmyounghoi/firstservice:k8.0.2 .
-docker push parkmyounghoi/firstservice:k8.0.2
+docker build -t parkmyounghoi/firstservice:k8.0.6 .
+docker push parkmyounghoi/firstservice:k8.0.6
